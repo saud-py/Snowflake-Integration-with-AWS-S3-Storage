@@ -10,7 +10,7 @@
        "s3:DeleteObject",
        "s3:DeleteObjectVersion"
       ],
-			"Resource": "arn:aws:s3::sf-integration-s3-data-store/*"
+	"Resource": "arn:aws:s3:::sf-integration-s3-data-store/*"
 		},
     {
       "Effect": "Allow",
