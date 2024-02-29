@@ -14,3 +14,6 @@ How to integrate the Snowflake Cloud Data Warehouse with AWS Cloud S3 Buckets to
 First there are files stored on the snowflake, we will transferring it to the AWS S3 with suitable integration will be transferred on the fly.
 We will be creating necessary roles and policies and provide required authentication
 We will also be creating objects in snowflake, such as Integration and External Stage Object.
+
+
+![SF-S3 drawio](https://github.com/saud-py/Snowflake-Integration-with-AWS-S3-Storage/assets/57790931/1cb6c660-d854-4b6d-981a-817bf5bfda10)
