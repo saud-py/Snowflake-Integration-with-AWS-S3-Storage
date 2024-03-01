@@ -12,34 +12,57 @@ Integrating Snowflake with AWS S3 Storage allows for efficient and secure data s
 3. COPY INTO command
 4. AWS Account
 
-##Configuration 
-#To establish a connection between Snowflake and AWS S3 Storage, the following configuration settings are required:
-Define External Stages: Create a Cloud Storage Integration: In Snowflake, create a cloud storage integration to store an IAM user for AWS along with other parameters
+## Configuring Snowflake to Access AWS S3 Storage
 
-Create an External Stage: Use the CREATE STAGE command in Snowflake to define an external stage that references the storage integration created earlier
+## Step 1: Configure AWS IAM User and Role
 
-Grant IAM User Permissions: Configure IAM access permissions in your AWS Management Console to allow the IAM user created by Snowflake to access bucket objects
-2
-.
-Set Up File Formats:
-Specify File Formats: When creating stages or loading data, include parameters such as FILE_FORMAT based on project-specific requirements and file formats
-1
-.
-Specify Access Controls:
-Configure Access Permissions for S3 Bucket: Create an IAM role in AWS with the necessary policies and permissions to access your S3 bucket containing data files
-2
-.
-Grant IAM User Permissions: Grant the IAM user permissions to access bucket objects by configuring IAM access permissions in your AWS Management Console
-2
-.
-Create Trust Relationship for Storage Integration: Execute queries in Snowflake to retrieve information about the storage integration, copy values of STORAGE_AWS_IAM_USER_ARN and STORAGE_AWS_EXTERNAL_ID, then grant access to the S3 storage integration by adjusting trust policy values in AWS
-4
-.
+1. Create an AWS IAM user for your Snowflake account.
+2. Create an IAM role with the necessary permissions to access the S3 bucket.
+3. Attach the IAM role to the IAM user created in step 1.
+
+## Step 2: Create a Storage Integration in Snowflake
+
+1. Create a storage integration in Snowflake with the following properties:
+   - `storage_aws_role_arn`: The ARN of the IAM role created in step 1.
+   - `storage_allowed_locations`: The location that the storage integration is allowed to access.
+   - `enabled`: Set to true to enable the storage integration.
+
+## Step 3: Create an External Stage
+
+1. Create an external stage in Snowflake with the following properties:
+   - `storage_integration`: The name of the storage integration created in step 2.
+   - `url`: The URL of the S3 bucket (e.g., s3://<bucket_name>/).
+
+## Step 4: Grant Access to the S3 Bucket
+
+1. Configure the IAM policy to allow Snowflake to access the S3 bucket.
+2. Attach the IAM policy to the IAM role created in step 1.
+
+## Step 5: Test the Connection
+
+1. Drop a file into the S3 bucket.
+2. Run the following SQL statement in Snowflake to list the files in the S3 bucket:
+   ```sql
+   LIST @<stage_name>;
+
+## Step 6: Use the External Stage
+  - Use the external stage to load or unload data from the S3 bucket.
+
+## Step 7: Manage File Formats
+  - Create a file format in Snowflake to define the structure of the data files in the S3 bucket.
+  - Use the file format when loading data from the S3 bucket.
+
+## Step 8: Configure Access Controls
+  - Use Snowflake's access controls to manage who can access the data in the S3 bucket.
+
+##Step 9: Monitor and Manage the Integration
+  - Monitor the integration for any issues or errors.
+  - Manage the integration as needed, such as updating permissions or adding new stages.
+
 
 ## Workflow
 First there are files stored on the snowflake, we will transferring it to the AWS S3 with suitable integration will be transferred on the fly.
 We will be creating necessary roles and policies and provide required authentication
 We will also be creating objects in snowflake, such as Integration and External Stage Object.
-
 
 ![SF-S3 drawio](https://github.com/saud-py/Snowflake-Integration-with-AWS-S3-Storage/assets/57790931/1cb6c660-d854-4b6d-981a-817bf5bfda10)
