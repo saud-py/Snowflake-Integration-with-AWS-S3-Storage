@@ -13,12 +13,9 @@ Integrating Snowflake with AWS S3 Storage allows for efficient and secure data s
 4. AWS Account
 
 ##Configuration 
-To establish a connection between Snowflake and AWS S3 Storage, the following configuration settings are required:
-Define External Stages:
-Create a Cloud Storage Integration: In Snowflake, create a cloud storage integration to store an IAM user for AWS along with other parameters
-1
-2
-.
+#To establish a connection between Snowflake and AWS S3 Storage, the following configuration settings are required:
+Define External Stages: Create a Cloud Storage Integration: In Snowflake, create a cloud storage integration to store an IAM user for AWS along with other parameters
+
 Create an External Stage: Use the CREATE STAGE command in Snowflake to define an external stage that references the storage integration created earlier
 
 Grant IAM User Permissions: Configure IAM access permissions in your AWS Management Console to allow the IAM user created by Snowflake to access bucket objects
